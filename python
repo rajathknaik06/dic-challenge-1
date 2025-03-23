@@ -1,0 +1,48 @@
+""" John is a data analyst who often works with text files. He needs a program that can analyze the contents of a text file and count the number of times a specific character appears in the file. 
+
+
+
+John wants a simple program that allows him to specify a file and a character to count within that file.
+
+Input format :
+The first line of input consists of the file's name to be analyzed.
+
+The second line of the input consists of the string they want to write within the file.
+
+The third line of the input consists of the character to count within the file.
+
+Output format :
+If the character is found, the output displays "The character 'X' appears {Y} times in the file." where X is the character and Y i the count,
+
+
+
+If the character does not appear in the file, the output displays "Character not found.""""
+
+def count_character_in_file(file_name, character):
+    try:
+        with open(file_name, 'r') as file:
+            content = file.read()
+            # Count the character while ignoring case
+            count = content.lower().count(character.lower())
+            return count
+    except FileNotFoundError:
+        return -1
+
+# Input: File name, content, and character to count
+file_name = input()
+content = input()
+character_to_count = input()
+
+# Write the content to the file
+with open(file_name, 'w') as file:
+    file.write(content)
+
+# Count the character in the file
+result = count_character_in_file(file_name, character_to_count)
+
+if result == -1:
+    print("File not found.")
+elif result == 0:
+    print("Character not found in the file.")
+else:
+    print(f"The character '{character_to_count}' appears {result} times in the file.")
